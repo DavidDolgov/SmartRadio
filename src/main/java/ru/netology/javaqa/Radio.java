@@ -3,6 +3,16 @@ package ru.netology.javaqa;
 public class Radio {
     private byte numberRadio;
     private byte levelVolume;
+    private byte quantityRadio = 10;
+    private byte maxLevelVolume = 100;
+    private byte minLevelVolume = 0;
+
+    public Radio(byte quantityRadio) {
+        this.quantityRadio = quantityRadio;
+    }
+
+    public Radio() {
+    }
 
     public byte getNumberRadio() {
         return numberRadio;
@@ -16,7 +26,7 @@ public class Radio {
         if (newNumberRadio < 0) {
             return;
         }
-        if (newNumberRadio > 9) {
+        if (newNumberRadio > quantityRadio - 1) {
             return;
         }
         numberRadio = newNumberRadio;
@@ -26,69 +36,37 @@ public class Radio {
         if (newLevelVolume < 0) {
             return;
         }
-        if (newLevelVolume > 10) {
+        if (newLevelVolume > maxLevelVolume) {
             return;
         }
         levelVolume = newLevelVolume;
     }
 
-    public byte remoteControlRadio(String controlButton) {
-        byte valueRadio = 0;
-
-        if (controlButton.equals("next")) {
-            next();
-        } else {
-            valueRadio = numberRadio;
-        }
-        if (controlButton.equals("prev")) {
-            prev();
-        }else {
-            valueRadio = numberRadio;
-        }
-        return valueRadio = numberRadio;
-    }
-
-    public byte remoteControlVolume(String controlButton) {
-        byte valueVolume = 0;
-
-        if (controlButton.equals("+")) {
-            nextLevelVolume();
-        } else {
-            valueVolume = levelVolume;
-        }
-        if (controlButton.equals("-")) {
-            prevLevelVolume();
-        }else {
-            valueVolume = levelVolume;
-        }
-        return valueVolume = levelVolume;
-    }
-
-    private void next() {
+    public void next() {
         numberRadio++;
-        if (numberRadio == 10) {
+        if (numberRadio == quantityRadio) {
             numberRadio = 0;
         }
     }
 
-    private void prev() {
+    public void prev() {
         numberRadio--;
         if (numberRadio == -1) {
-            numberRadio = 9;
+            numberRadio = (byte) (quantityRadio - 1);
         }
     }
 
-    private void nextLevelVolume() {
+    public void nextLevelVolume() {
         levelVolume++;
-        if (levelVolume == 11) {
-            levelVolume = 10;
+        if (levelVolume == maxLevelVolume + 1) {
+            levelVolume = maxLevelVolume;
         }
     }
 
-    private void prevLevelVolume() {
+    public void prevLevelVolume() {
         levelVolume--;
-        if (levelVolume == -1) {
-            levelVolume = 0;
+        if (levelVolume == minLevelVolume - 1) {
+            levelVolume = minLevelVolume;
         }
     }
 
