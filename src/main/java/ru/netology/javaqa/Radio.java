@@ -1,5 +1,12 @@
 package ru.netology.javaqa;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class Radio {
     private byte numberRadio;
     private byte levelVolume;
@@ -11,17 +18,12 @@ public class Radio {
         this.quantityRadio = quantityRadio;
     }
 
-    public Radio() {
+    public void next() {
+        numberRadio++;
+        if (numberRadio == quantityRadio) {
+            numberRadio = 0;
+        }
     }
-
-    public byte getNumberRadio() {
-        return numberRadio;
-    }
-
-    public byte getLevelVolume() {
-        return levelVolume;
-    }
-
     public void setNumberRadio(byte newNumberRadio) {
         if (newNumberRadio < 0) {
             return;
@@ -42,12 +44,6 @@ public class Radio {
         levelVolume = newLevelVolume;
     }
 
-    public void next() {
-        numberRadio++;
-        if (numberRadio == quantityRadio) {
-            numberRadio = 0;
-        }
-    }
 
     public void prev() {
         numberRadio--;
